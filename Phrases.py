@@ -18,9 +18,12 @@ def ReadQuest (filename, mas):
 
 def CheckDeath (string, marker):
     if len(string.split()) == 2:
-        return False
+        return True
     elif len(string.split()) > 2:
-        return string.split()[2] 
+        if string.split()[2]==marker:
+            return False
+        else:
+            return True
     '''global DeathMarker
     line=mas[i]
     #print(line)
