@@ -16,20 +16,29 @@ def ReadQuest (filename, mas):
 def CheckDeath (mas, i, marker):
     global DeathMarker
     line=mas[i]
+    #print(line)
+    Leng=len(mas)
     check = line.strip().split()[0].lower()
     if check==marker:
         DeathMarker=True
+        for i in range(i, Leng):
+            mas[i]='Death'
+    #else:
+      #  DeathMarker=False
 
 
 
+DeathMarker=False
 Test=[]
-marker='ваши'
+marker='Death'
 ReadReact ('yes.txt', 'yesnum.txt', Test)
-#CheckDeath(Test, 1, marker)
-print (Test)
-#Leng=len(Test)
-#for i in range (Leng):
-  #  if not DeathMarker:
-  #      print(Test[i])
-   # else:
-    #    print('Death',)
+
+#print(DeathMarker)
+#print (Test)
+Leng=len(Test)
+#print(Leng)
+for i in range (Leng):
+    CheckDeath(Test, i, marker)
+    print(Test[i])
+  #  if DeathMarker:
+   #     mas[i]='DEATH'
