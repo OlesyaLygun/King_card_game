@@ -4,7 +4,10 @@ def ReadReact (filename1, filename2, mas):
             for line in import_file1:
                 mas.append(line)
                 st=import_file2.readline()
-                stk=st.split()[0]+', '+st.split()[1]
+                if len(st.split())==2:
+                    stk=st.split()[0]+', '+st.split()[1]
+                else:
+                    stk=st.split()[0]+', '+st.split()[1]+' '+st.split()[2]
                 mas.append(stk)
             
 
@@ -13,8 +16,12 @@ def ReadQuest (filename, mas):
         for line in import_file:
             mas.append(line)
 
-def CheckDeath (mas, i, marker):
-    global DeathMarker
+def CheckDeath (string, marker):
+    if len(string.split()) == 2:
+        return False
+    elif len(string.split()) > 2:
+        return string.split()[2] 
+    '''global DeathMarker
     line=mas[i]
     #print(line)
     Leng=len(mas)
@@ -24,21 +31,25 @@ def CheckDeath (mas, i, marker):
         for i in range(i, Leng):
             mas[i]='Death'
     #else:
-      #  DeathMarker=False
+      #  DeathMarker=False'''
 
 
 
 DeathMarker=False
 Test=[]
 marker='Death'
-ReadReact ('yes.txt', 'yesnum.txt', Test)
+ReadReact ('no.txt', 'nonum.txt', Test)
 
 #print(DeathMarker)
 #print (Test)
 Leng=len(Test)
-#print(Leng)
+print(Test)
 for i in range (Leng):
-    CheckDeath(Test, i, marker)
-    print(Test[i])
+    print(CheckDeath(Test[i], marker))
+
+#print(Leng)
+#for i in range (Leng):
+  #  CheckDeath(Test, i, marker)
+  #  print(Test[i])
   #  if DeathMarker:
    #     mas[i]='DEATH'
