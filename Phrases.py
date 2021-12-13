@@ -15,6 +15,17 @@ def ReadQuest (filename, mas):
     with open(filename, encoding='UTF8') as import_file:
         for line in import_file:
             mas.append(line)
+            
+def ReadDateAns(filename, mas, k):
+    mas=list()
+    f=open(filename)
+    for line in f:
+        dataline=list()
+        i=0
+        while i<k:
+            dataline.append(line)
+        mas.append(dataline)
+    
 
 def CheckDeath (string, marker):
     if len(string.split()) == 2:
