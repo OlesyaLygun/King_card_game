@@ -1,8 +1,7 @@
 import Phrases
 import tkinter
-import Binary_tree
 
-window_width = 800
+window_width = 750
 window_height = 600
 card_parameters = [250, 100, 550, 500]
 current_number = 1
@@ -14,8 +13,8 @@ No_responce = []
 class Player():
 
     def __init__(self):
-        self.reputation = 10
-        self.money = 20
+        self.reputation = 30
+        self.money = 5
         self.is_Dead = False
 
 
@@ -54,7 +53,7 @@ def response(Yes_or_No, number):
         global current_number
         if Yes_or_No == "Yes":
             cleaning()
-            if (Phrases.CheckDeath(Yes_responce[number * 2 - 1]) != 'False'):
+            if (Phrases.CheckDeath(Yes_responce[number * 2 - 1]) == 'False'):
                 King.is_Dead = True
             printing(Yes_responce[number * 2 - 2] + '\n' + 'Репутация: ' + Yes_responce[number * 2 - 1].split(', ')[1] +
                      ', деньги: ' + Yes_responce[number * 2 - 1].split(', ')[0])
@@ -62,13 +61,13 @@ def response(Yes_or_No, number):
             King.reputation += int(Yes_responce[number*2 - 1].split(', ')[1])
         if Yes_or_No == "No":
             cleaning()
-            if (Phrases.CheckDeath(No_responce[number * 2 - 1]) != 'False'):
+            if (Phrases.CheckDeath(No_responce[number * 2 - 1]) == False):
                 King.is_Dead = True
             printing(No_responce[number * 2 - 2] + '\n' + 'Репутация: ' + No_responce[number * 2 - 1].split(', ')[1] +
                      ', деньги: ' + No_responce[number * 2 - 1].split(', ')[0])
             King.money += int(No_responce[number * 2 - 1].split(', ')[0])
-            King.reputation += int(No_responce[number * 2 - 1].split(', ')[1])
-
+            King.reputation += int(No_responce[number * 2 - 1].split(' ')[1])
+            
         if King.money <= 0 or King.reputation <= 0:
             King.is_Dead = True
         if King.is_Dead != True:
@@ -85,9 +84,21 @@ def response(Yes_or_No, number):
             cleaning()
             ordinary_page.after(1500, cleaning())
             printing("Вы умерли! Поздравляю")
+            ordinary_page.update()
+            cleaning()
+            ordinary_page.after(1500, cleaning())
+            img = tkinter.PhotoImage(file = r'C:\Users\olesi\King\King_card_game\original.png') 
+            image = ordinary_page.create_image(0, 0, anchor='nw',image=img)
+            ordinary_page.pack(row=2,column=1)
     else:
         cleaning()
+        ordinary_page.after(1500, cleaning())
         printing("Вы умерли! Поздравляю")
+        ordinary_page.after(1500, cleaning())
+        cleaning()
+        img = tkinter.PhotoImage(file = r'C:\Users\olesi\King\King_card_game\picture.png') 
+        image = ordinary_page.create_image(0, 0, anchor='nw',image=img)
+        ordinary_page.pack(row=1,column=1)
 
 
 
@@ -99,8 +110,8 @@ def main():
     root = tkinter.Tk()
     ordinary_page = tkinter.Canvas(root, width=window_width, height=window_height, bg="aquamarine")
     Phrases.ReadReact('yes.txt', 'yesnum.txt', Yes_responce)
-    Phrases.ReadReact('Нет.txt', 'НетРез.txt', No_responce)
-    Phrases.ReadQuest('Утверждения.txt', questions)
+    Phrases.ReadReact('no.txt', 'nonum.txt', No_responce)
+    Phrases.ReadQuest('state.txt', questions)
 
     # нижняя панель с кнопками
     frame = tkinter.Frame(root)

@@ -27,14 +27,13 @@ def ReadDateAns(filename, mas, k):
         mas.append(dataline)
     
 
-def CheckDeath (string, marker):
+def CheckDeath (string):
+    print(string.split())
     if len(string.split()) == 2:
         return True
     elif len(string.split()) > 2:
-        if string.split()[2]==marker:
-            return False
-        else:
-            return True
+        print('here')
+        return(False)
     '''global DeathMarker
     line=mas[i]
     #print(line)
@@ -56,11 +55,6 @@ ReadReact ('no.txt', 'nonum.txt', Test)
 
 #print(DeathMarker)
 #print (Test)
-Leng=len(Test)
-print(Test)
-for i in range (Leng):
-    print(CheckDeath(Test[i], marker))
-
 #print(Leng)
 #for i in range (Leng):
   #  CheckDeath(Test, i, marker)
